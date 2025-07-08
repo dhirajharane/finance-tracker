@@ -1,12 +1,16 @@
 import { handleDeleteTransaction } from "@/controllers/transactionController";
 import { connectDB } from "@/lib/db";
+import { errorResponse } from "@/utils/apiResponse";
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
+export async function DELETE(
+  _request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectDB();
-    return await handleDeleteTransaction(context.params.id);
+    return await handleDeleteTransaction(params.id);
   } catch (error) {
     console.error("DELETE /api/transactions/[id] error:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+    return errorResponse(error);
   }
 }
