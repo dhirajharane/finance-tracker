@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 Personal Finance Visualizer
 
-## Getting Started
+**Personal Finance Visualizer** is a modern, full-stack web application that helps you seamlessly track your expenses, set category-wise budgets, and visualize your spending trends—all in one beautiful dashboard.
 
-First, run the development server:
+Built with [Next.js](https://nextjs.org/), [MongoDB Atlas](https://www.mongodb.com/atlas), and [TypeScript](https://www.typescriptlang.org/), this app is designed for speed, reliability, and a delightful user experience.
+
+---
+
+## ✨ Features
+
+- **Dashboard Overview:**  
+  Instantly see your total spending, top categories, and recent transactions.
+
+- **Add & Manage Transactions:**  
+  Quickly log income or expenses with category, date, and description.
+
+- **Category-wise Budgets:**  
+  Set monthly budgets for each category and track your progress visually.
+
+- **Interactive Visualizations:**  
+  Pie charts and bar charts for category breakdowns and budget vs. actuals.
+
+- **Real-Time Updates:**  
+  All widgets update instantly when you add, edit, or delete transactions or budgets.
+
+- **Responsive Design:**  
+  Works beautifully on desktop, tablet, and mobile.
+
+---
+
+## 🚀 Getting Started
+
+### 1. **Clone the Repository**
+
+```bash
+git clone https://github.com/your-username/personal-finance-visualizer.git
+cd personal-finance-visualizer
+```
+
+### 2. **Install Dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. **Set Up Environment Variables**
+
+Create a `.env` file in the root directory and add your MongoDB connection string:
+
+```
+MONGODB_URI=your-mongodb-atlas-uri
+```
+
+> **Note:** Never commit your `.env` file to version control.
+
+### 4. **Run the Development Server**
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Project Structure
 
-## Learn More
+```
+app/                # Next.js app directory (pages, layouts, API routes)
+components/         # Reusable UI and dashboard components
+controllers/        # API controllers for business logic
+models/             # Mongoose models for MongoDB collections
+services/           # Service layer for database operations
+types/              # TypeScript interfaces and types
+lib/                # Utility functions and DB connection
+utils/              # API response helpers
+public/             # Static assets
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛡️ Production Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Deploy on Vercel (Recommended)**
 
-## Deploy on Vercel
+1. Push your code to GitHub.
+2. Go to [vercel.com/import](https://vercel.com/import) and import your repo.
+3. Set the `MONGODB_URI` environment variable in the Vercel dashboard.
+4. Click **Deploy**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **Manual Deployment**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Build the app:
+   ```bash
+   npm run build
+   ```
+2. Start the server:
+   ```bash
+   npm start
+   ```
+
+---
+
+## ⚙️ Tech Stack
+
+- **Frontend:** Next.js (App Router), React, Tailwind CSS
+- **Backend:** Next.js API routes, TypeScript
+- **Database:** MongoDB Atlas, Mongoose
+- **State Management:** React Context (for dashboard refresh)
+- **Charts:** [Recharts](https://recharts.org/)
+
+---
+
+## 📝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for improvements or bug fixes.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙏 Acknowledgements
+
+- [Next.js](https://nextjs.org/)
+- [MongoDB Atlas](https://www.mongodb.com/atlas)
+- [Recharts](https://recharts.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+**Personal Finance Visualizer** — Track smarter. Spend
