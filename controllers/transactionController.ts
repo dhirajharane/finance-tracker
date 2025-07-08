@@ -1,5 +1,6 @@
 import { createTransaction, deleteTransaction, getAllTransactions } from "@/services/transactionService";
 import { successResponse, errorResponse } from "@/utils/apiResponse";
+import { NextResponse } from "next/server";
 
 export const handleGetTransactions = async () => {
   try {
@@ -20,11 +21,14 @@ export const handleCreateTransaction = async (req: Request) => {
   }
 };
 
-export const handleDeleteTransaction = async (id: string) => {
+export const handleDeleteTransaction = async (id: string): Promise<NextResponse> => {
   try {
     await deleteTransaction(id);
-    return successResponse({}, "Transaction deleted");
+    return NextResponse.json({ message: "Transaction deleted" }, { status: 200 });
   } catch (error) {
-    return errorResponse(error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Failed to delete transaction" },
+      { status: 500 }
+    );
   }
 };
