@@ -9,6 +9,7 @@ export const getAllTransactions = async () => {
   return await Transaction.find().sort({ date: -1 });
 };
 
-export const deleteTransaction = async (id: string) => {
-  return await Transaction.findByIdAndDelete(id);
+export const deleteTransaction = async (id: string): Promise<boolean> => {
+  const result = await Transaction.findByIdAndDelete(id);
+  return !!result; // Returns true if deleted, false if not found
 };
