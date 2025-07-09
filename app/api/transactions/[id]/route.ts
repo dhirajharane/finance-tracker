@@ -2,21 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { handleDeleteTransaction } from "@/controllers/transactionController";
 
-
-type RouteContext = {
-  params: {
-    id: string;
-  };
-};
-
 export async function DELETE(
   _req: NextRequest,
-  context: RouteContext
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
+    const { id } = await params;
+
     await connectDB();
 
-    const id = context.params.id;
     if (!id) {
       return NextResponse.json({ success: false, error: "Missing transaction ID" }, { status: 400 });
     }
