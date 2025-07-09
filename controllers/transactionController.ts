@@ -24,10 +24,19 @@ export const handleCreateTransaction = async (req: Request) => {
 export const handleDeleteTransaction = async (id: string): Promise<NextResponse> => {
   try {
     await deleteTransaction(id);
-    return NextResponse.json({ success: true, message: "Transaction deleted" }, { status: 200 });
-  } catch (error) {
+
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to delete transaction" },
+      { success: true, message: "Transaction deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting transaction:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to delete transaction",
+      },
       { status: 500 }
     );
   }
