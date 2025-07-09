@@ -2,24 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { handleDeleteTransaction } from "@/controllers/transactionController";
 
-type Context = {
-  params: {
-    id: string;
-  };
-};
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: Context
+  context: { params: { id: string } }
 ): Promise<NextResponse> {
   try {
     await connectDB();
-
-    const deleted = await handleDeleteTransaction(params.id);
-    return deleted;
+    const id = context.params.id;
+    return await handleDeleteTransaction(id);
   } catch (error) {
     console.error("DELETE /api/transactions/[id] error:", error);
-
     return NextResponse.json(
       {
         success: false,
