@@ -4,12 +4,12 @@ import { handleDeleteTransaction } from "@/controllers/transactionController";
 
 export async function DELETE(
   _req: NextRequest,
-  context: { params: Record<string, string> }
+  context: any 
 ): Promise<NextResponse> {
   try {
     await connectDB();
 
-    const id = context.params.id;
+    const id = context.params?.id;
     if (!id) {
       return NextResponse.json({ success: false, error: "Missing transaction ID" }, { status: 400 });
     }
