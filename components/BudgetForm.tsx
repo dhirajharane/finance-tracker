@@ -14,7 +14,9 @@ export default function BudgetForm() {
     budgetAmount: "",
     month: new Date().toISOString().slice(0, 7),
   });
-  const  {triggerRefresh}  = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const triggerRefresh = refreshContext?.triggerRefresh;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +33,7 @@ export default function BudgetForm() {
       body: JSON.stringify({ ...form, budgetAmount: Number(form.budgetAmount) }),
     });
     setForm({ ...form, budgetAmount: "" });
-    triggerRefresh();
+    triggerRefresh?.();
   };
 
   return (

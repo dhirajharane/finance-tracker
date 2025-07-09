@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import { useDashboardRefresh } from "@/app/dashboard/DashboardRefreshContext";
 
 type BudgetVsActual = {
@@ -12,7 +20,8 @@ type BudgetVsActual = {
 
 export default function BudgetChart() {
   const [data, setData] = useState<BudgetVsActual[]>([]);
-  const { refreshKey } = useDashboardRefresh();
+  const refreshContext = useDashboardRefresh();
+  const refreshKey = refreshContext?.refreshKey;
 
   useEffect(() => {
     const month = new Date().toISOString().slice(0, 7);

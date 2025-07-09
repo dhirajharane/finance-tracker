@@ -16,7 +16,10 @@ type Transaction = {
 
 export default function TransactionList() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { refreshKey, triggerRefresh } = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const refreshKey = refreshContext?.refreshKey;
+  const triggerRefresh = refreshContext?.triggerRefresh;
 
   const fetchData = async () => {
     const res = await fetch("/api/transactions");
@@ -26,12 +29,11 @@ export default function TransactionList() {
 
   const deleteTxn = async (id: string) => {
     await fetch(`/api/transactions/${id}`, { method: "DELETE" });
-    triggerRefresh();
+    triggerRefresh?.();
   };
 
   useEffect(() => {
     fetchData();
-
   }, [refreshKey]);
 
   return (
@@ -47,7 +49,11 @@ export default function TransactionList() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className={`font-bold ${txn.type === "income" ? "text-green-600" : "text-red-500"}`}>
+              <span
+                className={`font-bold ${
+                  txn.type === "income" ? "text-green-600" : "text-red-500"
+                }`}
+              >
                 ₹{txn.amount}
               </span>
               <Button variant="ghost" size="icon" onClick={() => deleteTxn(txn._id)}>

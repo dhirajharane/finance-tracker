@@ -20,7 +20,9 @@ type InsightsData = {
 
 export default function SummaryCards() {
   const [data, setData] = useState<InsightsData | null>(null);
-  const { refreshKey } = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const refreshKey = refreshContext?.refreshKey;
 
   useEffect(() => {
     const fetchData = async () => {

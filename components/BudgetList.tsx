@@ -11,7 +11,9 @@ type BudgetItem = {
 
 export default function BudgetList() {
   const [budgets, setBudgets] = useState<BudgetItem[]>([]);
-  const { refreshKey } = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const refreshKey = refreshContext?.refreshKey;
 
   const fetchBudgets = async () => {
     const month = new Date().toISOString().slice(0, 7);

@@ -10,7 +10,9 @@ type PieData = { name: string; value: number };
 
 export default function CategoryPieChart() {
   const [data, setData] = useState<PieData[]>([]);
-  const { refreshKey } = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const refreshKey = refreshContext?.refreshKey;
 
   useEffect(() => {
     const month = new Date().toISOString().slice(0, 7);
@@ -32,7 +34,9 @@ export default function CategoryPieChart() {
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie dataKey="value" data={data} label outerRadius={80}>
-            {data.map((_, idx) => <Cell key={idx} fill={COLORS[idx % COLORS.length]} />)}
+            {data.map((_, idx) => (
+              <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
+            ))}
           </Pie>
           <Tooltip />
           <Legend />

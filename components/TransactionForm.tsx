@@ -3,7 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useState } from "react";
 import { useDashboardRefresh } from "@/app/dashboard/DashboardRefreshContext";
 
@@ -17,7 +23,9 @@ export default function TransactionForm() {
     type: "expense",
     category: "",
   });
-  const { triggerRefresh } = useDashboardRefresh();
+
+  const refreshContext = useDashboardRefresh();
+  const triggerRefresh = refreshContext?.triggerRefresh;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,7 +41,7 @@ export default function TransactionForm() {
     });
     if (res.ok) {
       setForm({ amount: "", description: "", date: "", type: "expense", category: "" });
-      triggerRefresh();
+      triggerRefresh?.();
     }
   };
 
@@ -73,12 +81,16 @@ export default function TransactionForm() {
             </SelectTrigger>
             <SelectContent>
               {categories.map((cat) => (
-                <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                <SelectItem key={cat} value={cat}>
+                  {cat}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleSubmit} className="mt-2">Add Transaction</Button>
+        <Button onClick={handleSubmit} className="mt-2">
+          Add Transaction
+        </Button>
       </div>
     </div>
   );
